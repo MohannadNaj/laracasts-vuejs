@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue js</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script src="libs.js"></script>
+</head>
+<body>
+	<hr>
+	<div id="app" class="container">
+		<div class="row">
+			<ul class="list-group">
+				<li :class="{
+				'list-group-item': true,
+				'list-group-item-success' : task.completed }"
+				v-for="task in tasks"
+				@click="task.completed = !task.completed"
+				>
+					{{ task.body }}
+				</li>
+			</ul>
+		</div>
+
+	</div>
+
+	<hr>
+
+	<script>
+
+	new Vue({
+		el: '#app',
+
+		data: {
+			tasks: [
+				{
+					body: 'Go to the store',
+					 completed: false
+				},
+				{
+					body: 'Go to the bank',
+					 completed: false
+				},
+				{
+					body: 'Go to the doctor', 
+					completed: true
+				}
+			],
+		},
+		methods: {
+			toggleCompletedFor: function(task) {
+				
+			}
+		}
+		,
+	});
+
+	</script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue js</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script src="libs.js"></script>
+</head>
+<body>
+	<hr>
+	<div id="app" class="container">
+		<global-counter subject="Likes"></global-counter>
+		<global-counter subject="Dislikes"></global-counter>
+		<counter subject="Reposts"></counter>
+		<counter subject="Favorites"></counter>
+	</div>
+
+	<hr>
+
+	<template id="global-counter-template">
+		<h2>{{ subject }}</h2>
+		<button @click="count +=1">
+			 {{ count }} : Increment!
+		</button>
+	</template>
+
+	<template id="counter-template">
+		<h1>{{ subject }}</h1>
+		<button @click="count +=1">
+			 {{ count }} : Increment!
+		</button>
+	</template>
+
+	<script>
+	Vue.component('global-counter', {
+		template: '#global-counter-template',
+		data: function() {
+			return { count: 0 }
+		},
+		props: [ 'subject']
+	});
+
+	new Vue({
+		el: '#app',
+		components: {
+			counter: {
+				template: '#counter-template',
+				data: function() {
+					return { count: 0 }
+				},
+				props: [ 'subject']
+			}
+		}
+	});
+
+	</script>
+</body>
+</html>

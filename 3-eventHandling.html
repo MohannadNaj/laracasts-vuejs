@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue js</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script src="libs.js"></script>
+</head>
+<body>
+	<hr>
+	<div id="app" class="container">
+		<form class="row" @submit.prevent="handleIt">
+			<button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</div>
+
+	<hr>
+
+	<div id="app2" class="container">
+			<button type="submit" class="btn btn-default" @click="increment">
+				Increment Counter {{ counter }}
+			</button>
+			<hr>
+			<button type="submit" class="btn btn-default" @click="counter2 += 1">
+				Increment Counter {{ counter2 }}
+			</button>
+			
+	</div>
+
+	<script>
+
+		new Vue({
+			el: '#app',
+			methods: {
+				handleIt: function() {
+					alert('Do something...');
+				}
+		  }
+		});
+
+		new Vue({
+			el: '#app2',
+			data: {
+				counter: 0, counter2: 0
+			},
+			methods: {
+				increment: function() {
+					this.counter += 1;
+				}
+		  }
+		});
+
+
+	</script>
+</body>
+</html>

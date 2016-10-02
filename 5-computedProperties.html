@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue js</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script src="libs.js"></script>
+</head>
+<body>
+	<hr>
+	<div id="app" class="container">
+		<h5>Skill: {{ points >  100 ? 'Advanced' : 'Begginer'}}</h5>
+		<input type="text" placeholder="points" v-model="points">
+	</div>
+
+	<hr>
+
+	<div id="app_2" class="container">
+		<h5>Skill: {{ skill }}</h5>
+		<input type="text" placeholder="points" v-model="points">
+	</div>
+
+	<hr>
+
+	<div id="app_3" class="container">
+		<div class="alert">
+			VueJs Watch example
+		</div>
+		<h4>fullname: {{ fullname }}</h4>
+
+		<input type="text" class="form-control" placeholder="first" v-model="first">
+		<input type="text" class="form-control" placeholder="last" v-model="last">
+	</div>
+
+	<hr>
+
+	<div id="app_4" class="container">
+		<div class="alert">
+			VueJs Computed example
+		</div>
+		<h4>fullname: {{ fullname }}</h4>
+
+		<input type="text" class="form-control" placeholder="first" v-model="first">
+		<input type="text" class="form-control" placeholder="last" v-model="last">
+	</div>
+
+	<hr>
+
+	<script>
+
+	new Vue({
+		el: '#app',
+		data: {
+			points: 50
+		}
+	});
+
+	new Vue({
+		el: '#app_2',
+		data: {
+			points: 50
+		},
+		computed: {
+			skill: function() {
+				if(this.points <= 100) {
+					return 'Begginer'
+				} 
+				return 'Advanced'
+			}
+		}
+	});
+
+	new Vue({
+		el: '#app_3',
+		data: {
+			first: 'Hi',
+			last: 'There',
+			fullname: 'Hi There!'
+		},
+		watch: {
+			first: function(first) {
+				this.fullname = first + ' ' + this.last
+			},
+			last: function(last) {
+				this.fullname = this.first + ' ' + last
+			},
+		}
+	});
+
+	new Vue({
+		el: '#app_4',
+		data: {
+			first: 'Hi',
+			last: 'There',
+		},
+		computed: {
+			fullname: function() {
+				return this.first + ' ' + this.last
+			},
+		}
+	});
+
+	</script>
+</body>
+</html>

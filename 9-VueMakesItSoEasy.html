@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Vue js</title>
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<script src="libs.js"></script>
+</head>
+<body>
+	<hr>
+	<template id="tasks-template">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-4">
+				<h5>My Tasks <span class="badge" v-show="remaining">{{ remaining }}</span> </h5>
+				<ul v-show="list.length" class="list-group">
+					<li :class="{
+					'list-group-item': true,
+					'list-group-item-success' : task.completed }"
+					v-for="task in list"
+					@click="task.completed = !task.completed"
+					>
+						{{ task.body }}
+						<button type="button"
+						class="btn btn-danger btn-xs pull-right"
+						@click="deleteTask(task)"
+						>X</button>
+					</li>
+				</ul>
+				<div class="alert alert-warning"
+				v-else>
+					No tasks in this list.
+				</div>
+				<button type="button" class="btn btn-default btn-sn" @click="clearCompleted">
+					Clear Completed
+				</button>
+			</div>
+		</div>
+	</div>
+	</template>
+
+	<div id="app" class="container">
+		<div class="row">
+			<todo-tasks :list="tasks">
+			</todo-tasks>
+			<todo-tasks :list="[{body: 'Inline List', completed: true} , {body: 'Second Inline List', completed: false}]">
+			</todo-tasks>
+		</div>
+	</div>
+
+	<hr>
+
+	<script>
+
+	Vue.component('todo-tasks', {
+		props: ['list'],
+		template: "#tasks-template",
+
+		computed: {
+			remaining: function() {
+				return this.list.filter(this.inProgress).length
+			}
+		},
+		methods: {
+			isCompleted: function (task) {
+				return task.completed;
+			},
+			inProgress: function(task) {
+				return ! this.isCompleted(task);
+			},
+			deleteTask: function(task) {
+				this.list.$remove(task);
+			},
+			clearCompleted: function() {
+				this.list = this.list.filter(this.inProgress);
+			}
+		}
+	});
+
+	new Vue({
+		el: '#app',
+
+		data: {
+			tasks: [
+				{
+					body: 'Go to the store',
+					 completed: false
+				},
+				{
+					body: 'Go to the bank',
+					 completed: false
+				},
+				{
+					body: 'Go to the doctor', 
+					completed: true
+				}
+			],
+		}
+	});
+
+	</script>
+</body>
+</html>
