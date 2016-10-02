@@ -13,7 +13,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-sm-5 col-sm-push-2">
-                    <tasks list="{{ json_encode($tasks) }}"></tasks>
+                    <tasks></tasks>
                 </div>
             </div>
         </div>
