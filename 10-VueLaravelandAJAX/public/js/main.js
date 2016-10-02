@@ -8,13 +8,16 @@ Vue.component('tasks', {
 	},
 
 	created: function() {
-		var vm = this;
-		$.getJSON('api/tasks', function(tasks){
-			vm.list = tasks;
-		});
+		this.fetchTasks();
 	},
 
 	methods: {
+		fetchTasks: function() {
+			var vm = this;
+			$.getJSON('api/tasks', function(tasks){
+				vm.list = tasks;
+			});
+		},
 		remove: function(task) {
 			this.list.$remove(task);
 		}
