@@ -12,5 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $tasks = App\Task::latest()->get();
+
+    return view('welcome', compact('tasks'));
 });
