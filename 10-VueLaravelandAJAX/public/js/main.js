@@ -12,7 +12,14 @@ Vue.component('tasks', {
 		$.getJSON('api/tasks', function(tasks){
 			vm.list = tasks;
 		});
+	},
+
+	methods: {
+		remove: function(task) {
+			this.list.$remove(task);
+		}
 	}
+
 });
 
 new Vue({

@@ -22,6 +22,8 @@
         <ul class="list-group">
             <li class="list-group-item" v-for="task in list">
                 @{{ task.body }}
+
+                <button @click="remove(task)" type="button" class="btn btn-danger btn-xs pull-right">X</button>
             </li>
         </ul>
     </template>
