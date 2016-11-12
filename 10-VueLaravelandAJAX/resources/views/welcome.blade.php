@@ -28,6 +28,6 @@
         </ul>
     </template>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/1.0.28/vue.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="<?=asset('/js/main.js')?>"></script>
     </body>
 </html>
