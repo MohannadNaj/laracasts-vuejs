@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Vue js - ComponentExercise #1</title>
+    <link rel="stylesheet" href="bootstrap.min.css">
+    <script src="libs.js"></script>
+</head>
+
+<body>
+<hr>
+<div class="container">
+	<div class="jumbotron">
+
+	    <alert type="info">Content!</alert>
+	    <alert type="warning">Content!</alert>
+	    <alert type="success">Content!</alert>
+	    <alert type="danger">Content!</alert>
+	
+	</div>
+</div>
+    <template id="alert-tpl">
+        <div :class="alert_classes" v-show="show">
+            <slot></slot>
+            <button type="button" class="close" @click="show = false">&times;</button>
+        </div>
+    </template>
+
+    <script type="text/javascript">
+	    Vue.component('alert', {
+	        template: '#alert-tpl',
+	        data: function() {
+	            return {
+	                show: true,
+	            }
+	        },
+	        computed: {
+	        	alert_classes: function() {
+	        		var type = this.type;
+	        		return ['alert', 'alert-' + type];
+	        	}
+	        },
+	        props: ['type']
+	    });
+
+	    new Vue({
+	        el: 'body',
+	    });
+    </script>
+</body>
+
+</html>
