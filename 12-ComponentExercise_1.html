@@ -11,7 +11,8 @@
 <hr>
 <div class="container">
 	<div class="jumbotron">
-
+		<alert-builder></alert-builder>
+		<hr>
 	    <alert type="info">Content!</alert>
 	    <alert type="warning">Content!</alert>
 	    <alert type="success">Content!</alert>
@@ -24,6 +25,13 @@
             <slot></slot>
             <button type="button" class="close" @click="show = false">&times;</button>
         </div>
+    </template>
+
+    <template id="alert-builder-tpl">
+        <button @click="add()" type="button" class="btn btn-primary">
+        	+ Add
+        </button>
+		<alert v-for="alert in alerts_reserve" :type="alert.type">{{ alert.message }}</alert>
     </template>
 
     <script type="text/javascript">
@@ -43,6 +51,30 @@
 	        props: ['type']
 	    });
 
+	    Vue.component('alert-builder', {
+	    	template: '#alert-builder-tpl',
+	    	data: function() {
+	    		return {
+	    			alerts: []
+	    		}
+	    	},
+	    	methods:{
+	    		add: function() {
+	    			var types = ['info', 'warning', 'success', 'danger'];
+	    			var data = {
+	    				type: types[Math.floor((Math.random() * 4) + 0)],
+	    			}
+	    			data.message = 'This alert have the class alert-' + data.type + ', randomly created! ';
+
+	    			this.alerts.push(data);
+	    		}
+	    	},
+	    	computed: {
+			    alerts_reserve: function() {
+			        return this.alerts.reverse();
+			    }
+			}
+	    });
 	    new Vue({
 	        el: 'body',
 	    });
